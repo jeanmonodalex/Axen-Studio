@@ -58,9 +58,36 @@
         transform: translateY(-1px);
         box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       }
+
+      /* Back to Top button styles */
+      .back-to-top {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out;
+        z-index: 1000;
+      }
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+      @media (min-width: 640px) {
+        .back-to-top {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
+    <!-- Back to Top Button -->
+    <button onclick="scrollToTop()" class="back-to-top bg-[#D15ED3] hover:bg-[#b13eb3] text-[#141414] w-12 h-12 rounded-full flex items-center justify-center shadow-lg transform transition-all duration-200 hover:-translate-y-1 hover:shadow-xl">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6"/>
+      </svg>
+    </button>
+
     <!-- Main container with relative positioning, full size, minimum height, flex layout, background color, and font family -->
     <div class="relative flex size-full min-h-screen flex-col bg-[#EBE3DB] group/design-root overflow-x-hidden" style="font-family: 'Bricolage Grotesque', sans-serif;">
       <!-- Layout container with flex layout, full height, and growing enabled -->
@@ -352,6 +379,27 @@
 
         // Add navigation controls
         map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      });
+    </script>
+
+    <!-- Back to Top Script -->
+    <script>
+      // Back to top functionality
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // Show/hide back to top button based on scroll position
+      const backToTopButton = document.querySelector('.back-to-top');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTopButton.classList.add('visible');
+        } else {
+          backToTopButton.classList.remove('visible');
+        }
       });
     </script>
   </body>
