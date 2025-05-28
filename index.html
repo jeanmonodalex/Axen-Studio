@@ -111,6 +111,7 @@
           <!-- Container for booking button -->
           <div class="flex justify-center sm:justify-end gap-8 w-full sm:w-auto">
             <a href="https://calendly.com/alex_massage/first_appointment?back=1&month=2025-05"
+              onclick="gtag('event', 'book_now_click', {'event_category': 'Engagement','event_label': 'Book Now Button', 'button_placement': 'top_right'});"
               class="flex w-full sm:w-auto min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#D15ED3] hover:bg-[#b13eb3] transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-md text-[#141414] text-sm font-bold leading-normal tracking-[0.015em]"
             >
               <span class="truncate book-now-font">Book Now</span>
@@ -189,7 +190,9 @@
                 <span class="text-[#141414] text-4xl font-black leading-tight tracking-[-0.033em]">Donation</span>
               </div>
             </div>
-            <a href="https://calendly.com/alex_massage/first_appointment?back=1&month=2025-05" class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#D15ED3] text-[#141414] text-sm font-bold leading-normal tracking-[0.015em]">
+            <a href="https://calendly.com/alex_massage/first_appointment?back=1&month=2025-05" 
+              onclick="gtag('event', 'book_now_click', {'event_category': 'Engagement','event_label': 'Book Now Button', 'button_placement': 'pricing_section'});"
+              class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#D15ED3] text-[#141414] text-sm font-bold leading-normal tracking-[0.015em]">
               <span class="truncate">Book Now</span>
             </a>
             <div>
