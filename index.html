@@ -8,6 +8,9 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied'
+      });
       gtag('config', 'G-1S3YWF5D8Q');
     </script>
 
@@ -87,6 +90,40 @@
           display: none;
         }
       }
+
+      /* Cookie Banner styles */
+      .cookie-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1001;
+        display: none;
+      }
+      .cookie-banner.show {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+      @media (max-width: 640px) {
+        .cookie-banner {
+          flex-direction: column;
+          text-align: center;
+        }
+        .cookie-banner .buttons {
+          display: flex;
+          gap: 0.5rem;
+          width: 100%;
+        }
+        .cookie-banner button {
+          flex: 1;
+        }
+      }
     </style>
   </head>
   <body>
@@ -111,7 +148,7 @@
           <!-- Container for booking button -->
           <div class="flex justify-center sm:justify-end gap-8 w-full sm:w-auto">
             <a href="https://calendly.com/alex_massage/first_appointment?back=1&month=2025-05"
-              onclick="gtag('event', 'book_now_click', {'event_category': 'Engagement','event_label': 'Book Now Button', 'button_placement': 'top_right'});"
+              onclick="gtag('event', 'button_clicked', {'event_category': 'Engagement','event_label': 'Book Now Button', 'button_placement': 'top_right'});"
               class="flex w-full sm:w-auto min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-xl h-10 px-4 bg-[#D15ED3] hover:bg-[#b13eb3] transition-all duration-200 transform hover:-translate-y-0.5 hover:shadow-md text-[#141414] text-sm font-bold leading-normal tracking-[0.015em]"
             >
               <span class="truncate book-now-font">Book Now</span>
@@ -415,6 +452,48 @@
           backToTopButton.classList.remove('visible');
         }
       });
+    </script>
+
+    <!-- Cookie Banner -->
+    <div id="cookieBanner" class="cookie-banner">
+      <p class="text-[#141414] text-sm md:text-base m-0">
+        We use cookies to analyze our website traffic and provide a better experience. 
+        <a href="#" class="text-[#D15ED3] underline">Privacy Policy</a>
+      </p>
+      <div class="buttons">
+        <button onclick="declineCookies()" class="px-4 py-2 text-sm font-bold text-[#141414] bg-[#e0e0e0] rounded-lg hover:bg-[#d0d0d0]">Decline</button>
+        <button onclick="acceptCookies()" class="px-4 py-2 text-sm font-bold text-[#141414] bg-[#D15ED3] rounded-lg hover:bg-[#b13eb3] ml-2">Accept</button>
+      </div>
+    </div>
+
+    <!-- Cookie Consent Script -->
+    <script>
+      function showCookieBanner() {
+        if (!localStorage.getItem('cookieConsent')) {
+          document.getElementById('cookieBanner').classList.add('show');
+        }
+      }
+
+      function acceptCookies() {
+        localStorage.setItem('cookieConsent', 'accepted');
+        document.getElementById('cookieBanner').classList.remove('show');
+        // Enable Google Analytics
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+
+      function declineCookies() {
+        localStorage.setItem('cookieConsent', 'declined');
+        document.getElementById('cookieBanner').classList.remove('show');
+        // Disable Google Analytics
+        gtag('consent', 'update', {
+          'analytics_storage': 'denied'
+        });
+      }
+
+      // Show banner when page loads
+      document.addEventListener('DOMContentLoaded', showCookieBanner);
     </script>
   </body>
 </html>
